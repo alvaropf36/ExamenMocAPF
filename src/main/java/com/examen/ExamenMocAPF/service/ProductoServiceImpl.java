@@ -3,11 +3,13 @@ package com.examen.ExamenMocAPF.service;
 import com.examen.ExamenMocAPF.entity.Producto;
 import com.examen.ExamenMocAPF.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
@@ -53,6 +55,7 @@ public class ProductoServiceImpl implements ProductoService {
     public Producto modificarProducto(Long productoId, Producto producto) {
         Optional<Producto> productoBbdd = this.productoRepository.findById(productoId);
         if (productoBbdd.isPresent()){
+            producto.setId(productoId);
             return this.productoRepository.save(producto);
         }
         return null;
